@@ -10,7 +10,7 @@ appointments = [
   { 'id': "5",'doctor': "2", 'date': "22 Nov 2023", 'rating':"Good"  },
 ]
 
-#MAKING the CHANGES 
+#MAKING the CHANGES To this file
 
 
 
