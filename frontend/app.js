@@ -31,6 +31,8 @@ app.get('/api/doctors', async (req, res) => {
   }
 });
 
+// Making changes to check workflow trigger
+
 app.get('/api/appointments', async (req, res) => {
   let url  = process.env.APPOINTMENTS_SERVICE_URL;
   try {
