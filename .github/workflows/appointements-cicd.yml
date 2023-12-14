@@ -1,35 +1,59 @@
-name: CI/CD Pipeline
+name: Appointments Workflow
 
+# Triggering the workflow on push and pull requests specifically for changes in the appointments folder
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
     paths:
       - 'appointments/**'
   pull_request:
+    branches:
+      - main
     paths:
       - 'appointments/**'
 
-jobs:
-  build-and-push:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-    
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+# Permissions for the workflow
+permissions:
+  checks: write
+  contents: write
 
-    - name: Login to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
-    
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v2
-      with:
-        context: ./appointments
-        file: ./appointments/Dockerfile
-        push: true
-        tags: areebaasif/appointments-service:${{ github.sha }}
+# Jobs defined for the workflow
+jobs:
+  build-and-push-appointments:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      # Extracting commit SHA for versioning
+      - name: Extract commit SHA
+        run: echo "commit_sha=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        shell: bash
+
+      # Building and Pushing Docker Image for Appointments with the respective version
+      - name: Build and Push Docker Image for Appointments
+        uses: docker/build-push-action@v2
+        with:
+          context: ./appointments
+          push: true
+          tags: areebaasif/appointments-service:${{ env.commit_sha }} # Using commit hash for versioning
+
+      # Updating Docker Compose for Appointments with the new image tag
+      - name: Update Docker Compose for Appointments
+        run: |
+          sed -i "s|image: areebaasif/appointments-service:[^ ]*|image: areebaasif/doctors-service:${{ env.commit_sha }}|" docker-compose.yml
+          git config --global user.name 'areebaasif'
+          git config --global user.email 'areebaasif1052@gmail.com'
+          git add docker-compose.yml
+          git commit -m "Update docker-compose file for appointments with new image tag"
+          git push origin main
