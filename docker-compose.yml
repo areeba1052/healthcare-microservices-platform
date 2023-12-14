@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   appointments:
-    image: areebaasif/appointments-service
+    image: areebaasif/appointments-service:537c912
     build: ./appointments
     ports:
       - "7070:7070"
