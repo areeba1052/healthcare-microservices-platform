@@ -1,102 +1,79 @@
-🏥 Healthcare Microservices Demo
+# 🏥 Healthcare Microservices Platform
 
-By Areeba Asif
-A containerized microservices-based healthcare system built with Flask, Docker, Kubernetes, and GitHub Actions.
-This project demonstrates a complete CI/CD workflow — from code to containerization and deployment — using modern DevOps tools.
+A **containerized microservices system** built with **Flask**, **React**, **Docker**, and **Kubernetes**, showcasing modern **CI/CD automation** using **GitHub Actions** and **DockerHub**.
 
-🧠 Overview
+---
 
-The system consists of three main services:
+## ⚙️ Overview
 
-🧑‍⚕️ Doctors Service – Provides a list of available doctors.
+This project simulates a scalable healthcare platform with the following services:
 
-📅 Appointments Service – Manages patient appointments.
+- 🩺 **Appointments Service** – Handles patient appointment scheduling  
+- 👨‍⚕️ **Doctors Service** – Manages doctor information and availability  
+- 💻 **Frontend Service** – React-based interface connecting users to APIs  
+- 🗄️ **MongoDB** – Central database for persistent data  
 
-💻 Frontend Service – Displays doctors and appointments in a simple UI.
+All services are containerized and deployed via automated CI/CD pipelines.
 
-All services are containerized and deployed using Docker Compose and Kubernetes (K8s), with GitHub Actions automating image builds and updates.
+---
 
-⚙️ Key Features
+## 🧩 Tech Stack
 
-Microservices Architecture — Independent Flask apps for each component
+| Category | Technology |
+|-----------|-------------|
+| Backend | Flask (Python) |
+| Frontend | React |
+| Database | MongoDB |
+| CI/CD | GitHub Actions + DockerHub |
+| Deployment | Docker Compose, Kubernetes |
+| Infrastructure | ConfigMaps, Secrets, Deployments, Services |
 
-CI/CD Pipelines — Automated Docker builds via GitHub Actions
+---
 
-Kubernetes Deployment — ConfigMaps, Secrets, Deployments, and Services for each module
+## 🧱 Project Structure
 
-Docker Compose — Local multi-container setup for quick testing
+.github/workflows/
+│ ├── appointments-cicd.yml
+│ ├── doctors-cicd.yml
+│ └── frontend.yml
+appointments/
+│ ├── app.py
+│ ├── Dockerfile
+│ └── k8s/app.yaml
+doctors/
+│ ├── app.py
+│ ├── Dockerfile
+│ └── k8s/app.yaml
+frontend/
+│ ├── app.js
+│ ├── Dockerfile
+│ └── k8s/app.yaml
+docker-compose.yml
+requirements.txt
+---
 
-MongoDB Integration — For persistent data storage
+## 🚀 Features
 
-🧰 Technologies Used
+- 🔹 **Microservices architecture** for modular scalability  
+- 🔹 **CI/CD pipelines** for auto-build and deployment  
+- 🔹 **Kubernetes manifests** for orchestration  
+- 🔹 **Dockerized services** with versioned tags  
+- 🔹 **Secure configuration** via ConfigMaps and Secrets  
 
-Python (Flask, REST APIs)
+---
 
-Docker & Docker Compose
+## 🧠 Notes
 
-Kubernetes (YAML Configs)
+Each microservice has:
+- Its own **Dockerfile** and **Kubernetes manifest**  
+- A **GitHub Actions workflow** to build, push, and version Docker images automatically  
 
-GitHub Actions (CI/CD)
+---
 
-MongoDB
+## 👩‍💻 Author
 
-HTML / JS Frontend
+**Areeba Asif**  
 
-🧩 Project Structure
-├── appointments/
-│   ├── app.py
-│   ├── Dockerfile
-│   ├── k8s/
-│   │   └── app.yaml
-│
-├── doctors/
-│   ├── app.py
-│   ├── Dockerfile
-│   ├── k8s/
-│   │   └── app.yaml
-│
-├── frontend/
-│   ├── index.html
-│   ├── main.js
-│   ├── Dockerfile
-│   ├── k8s/
-│   │   └── app.yaml
-│
-├── .github/workflows/
-│   ├── appointments-cicd.yml
-│   ├── doctors-cicd.yml
-│   └── frontend.yml
-│
-├── docker-compose.yml
-└── k8s/
-    ├── app.yaml
-    ├── doctors-configmap.yaml
-    └── mongo-secret.yaml
+---
 
-🚀 CI/CD Workflow
-
-Each service has its own GitHub Actions pipeline:
-
-Automatically builds a Docker image when code changes are pushed.
-
-Tags the image with the commit hash.
-
-Updates the docker-compose.yml file with the new version.
-
-Commits and pushes the update back to the main branch.
-
-🧾 Learning Outcomes
-
-Implementing microservices using Flask
-
-Setting up automated CI/CD pipelines with GitHub Actions
-
-Using Docker Compose for local orchestration
-
-Managing Kubernetes deployments with Secrets and ConfigMaps
-
-Understanding DevOps workflows end-to-end
-
-🏫 Academic Context
-
-This project was created as part of a DevOps / MLOps course assignment to demonstrate full-stack deployment automation.
+> 🎓 *Developed as part of MLOps/DevOps coursework and evolved into a complete microservices showcase.*
