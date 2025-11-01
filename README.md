@@ -30,24 +30,25 @@ All services are containerized and deployed via automated CI/CD pipelines.
 
 ---
 
-## 🗂️ Project Structure
+## 📁 Project Structure
 
+```text
 .github/workflows/
-│ ├── appointments-cicd.yml
-│ ├── doctors-cicd.yml
-│ └── frontend.yml
+│   ├── appointments-cicd.yml
+│   ├── doctors-cicd.yml
+│   └── frontend.yml
 appointments/
-│ ├── app.py
-│ ├── Dockerfile
-│ └── k8s/app.yaml
+│   ├── app.py
+│   ├── Dockerfile
+│   └── k8s/app.yaml
 doctors/
-│ ├── app.py
-│ ├── Dockerfile
-│ └── k8s/app.yaml
+│   ├── app.py
+│   ├── Dockerfile
+│   └── k8s/app.yaml
 frontend/
-│ ├── app.js
-│ ├── Dockerfile
-│ └── k8s/app.yaml
+│   ├── app.js
+│   ├── Dockerfile
+│   └── k8s/app.yaml
 docker-compose.yml
 requirements.txt
 
